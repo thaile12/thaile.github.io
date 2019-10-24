@@ -16,11 +16,23 @@
     </div>
   </div>
   <script>
+    function randomNumber(from, to) {
+      return Math.floor(Math.random() * (to - from + 1)) + from;
+    }
+
+
     function loadData() {
       fetch('ajax_sample.json')
         .then(res => res.json())
-        .then(res => res.map(c => c.code))
-        .then(codes => document.querySelector(".content").innerText = codes);
+        .then(data => data.map(c => c.name + " - " + c.code))
+        .then(data => {
+          for(let i = 0; i <5; i++) {
+            range = randomNumber(0,242);
+            data[i] = "<li>" + data[range] + "</li>";
+          }
+          newlist = data.splice(1,15,",")
+          document.querySelector(".content").innerHTML = "<ol>" + newlist.join("") + "</ol>";
+         });
     }
   </script>
 </body>
