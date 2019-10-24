@@ -26,12 +26,16 @@
         .then(res => res.json())
         .then(data => data.map(c => c.name + " - " + c.code))
         .then(data => {
-          for(let i = 0; i <15; i++) {
-            range = randomNumber(0,242);
-            data[i] = "<li>" + data[range] + "</li>";
+          const listCountries = [];
+          j = 0;
+          while(j <15) {
+            range = randomNumber(0, data.length -1);
+            if (listCountries.includes(data[range]) == false) {
+              listCountries[j] = "<li>" + data[range] + "</li>";
+              j++;
+            }
           }
-          newlist = data.splice(1,15,",")
-          document.querySelector(".content").innerHTML = "<ol>" + newlist.join("") + "</ol>";
+          document.querySelector(".content").innerHTML = "<ol>" + listCountries.join("") + "</ol>";
          });
     }
   </script>
